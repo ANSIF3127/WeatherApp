@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Weather Icon and Title ------>
+    <title>Weather App</title>
+    <link rel="icon" type="image/png" href=".//image/weather-app (1).png" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Main Container ----->
+    <div class="main-container" id="mainContainer">
+        <!-- Animated background elements ----->
+        <div class="bg-element bg-element-1"></div>
+        <div class="bg-element bg-element-2"></div>
+        <div class="bg-element bg-element-3"></div>
+
+        <div class="container-fluid py-4">
+            <!-- Header -->
+            <header class="d-flex justify-content-between align-items-center mb-5">
+                <div class="d-flex align-items-center">
+                    <div class="logo-container me-3">
+                        <img src=".//image/weather-app (1).png" alt="Weather Logo" class="logo-img" />
+                    </div>
+                    <h1 class="app-title ">Weather App</h1>
+                </div>
+
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </header>
+
+            <!-- Search Section -->
+            <div class="weather-card mb-5">
+                <h2 class="section-title mb-4">Search Weather by City</h2>
+
+                <div class="card">
+                    <div class="search">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                            <input type="text" class="form-control search-input" placeholder="Enter city name..."
+                                spellcheck="false">
+                            <button class="btn search-btn" type="button">
+                                <span class="search-text">
+                                    <i class="fas fa-search me-2"></i>
+                                    Search
+                                </span>
+                                <div class="spinner-border spinner-border-sm d-none" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div class="error">
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            <p class="mb-0">Invalid city name. Please check the spelling and try again.</p>
+                        </div>
+                    </div>
+
+                    <!-- Weather Display -->
+                    <div class="weather">
+                        <div class="text-center mb-4">
+                            <h3 class="city-name mb-2"></h3>
+                            <p class="country-name"></p>
+                        </div>
+
+                        <div class="row">
+                            <!-- Main Weather Info -->
+                            <div class="col-lg-6 text-center mb-4">
+                                <div class="weather-icon-container mb-3">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png"
+                                        class="weather-icon" alt="Weather Icon">
+                                </div>
+                                <div class="temperature-display mb-2">
+                                    <span class="temp">22°C</span>
+                                </div>
+                                <div class="weather-condition mb-2"></div>
+                                <div class="weather-description"></div>
+                            </div>
+
+                            <!-- Weather Details -->
+                            <div class="col-lg-6">
+                                <div class="weather-details">
+                                    <div class="detail-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-tint detail-icon"></i>
+                                                <span class="detail-label">Humidity</span>
+                                            </div>
+                                            <span class="humidity detail-value">0%</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-wind detail-icon"></i>
+                                                <span class="detail-label">Wind Speed</span>
+                                            </div>
+                                            <span class="wind detail-value">0 km/h</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-eye detail-icon"></i>
+                                                <span class="detail-label">Visibility</span>
+                                            </div>
+                                            <span class="visibility detail-value">10 km</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-6">
+                                            <div class="sun-time-card">
+                                                <i class="fas fa-sun sun-icon"></i>
+                                                <div class="sun-time-label">Sunrise</div>
+                                                <div class="sunrise-time">6:30 AM</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="sun-time-card">
+                                                <i class="fas fa-moon sun-icon"></i>
+                                                <div class="sun-time-label">Sunset</div>
+                                                <div class="sunset-time">7:45 PM</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Weather part -->
+            <div class="weather-card">
+                <h2 class="section-title text-center mb-5">Global Weather </h2>
+
+                <!-- Contents   -->
+                <div class="continent-section mb-5">
+                    <h3 class="continent-title">North America</h3>
+                    <div class="table-responsive">
+                        <table class="table weather-table">
+                            <thead>
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Capital</th>
+                                    <th class="text-center">Weather</th>
+                                    <th class="text-center">Min Temp</th>
+                                    <th class="text-center">Max Temp</th>
+                                    <th class="text-center">Avg Temp</th>
+                                    <th class="text-center">Humidity</th>
+                                    <th class="text-center">Wind</th>
+                                    <th class="text-center">Condition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="country-name-cell">United States</td>
+                                    <td class="capital-name">Washington D.C.</td>
+                                    <td class="text-center weather-emoji">⛅</td>
+                                    <td class="text-center min-temp">18°C</td>
+                                    <td class="text-center max-temp">32°C</td>
+                                    <td class="text-center avg-temp">25°C</td>
+                                    <td class="text-center humidity-cell">65%</td>
+                                    <td class="text-center wind-cell">12 km/h</td>
+                                    <td class="text-center condition-cell">Partly Cloudy</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">Canada</td>
+                                    <td class="capital-name">Ottawa</td>
+                                    <td class="text-center weather-emoji">❄️</td>
+                                    <td class="text-center min-temp">5°C</td>
+                                    <td class="text-center max-temp">15°C</td>
+                                    <td class="text-center avg-temp">10°C</td>
+                                    <td class="text-center humidity-cell">78%</td>
+                                    <td class="text-center wind-cell">18 km/h</td>
+                                    <td class="text-center condition-cell">Snow</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">Mexico</td>
+                                    <td class="capital-name">Mexico City</td>
+                                    <td class="text-center weather-emoji">☀️</td>
+                                    <td class="text-center min-temp">22°C</td>
+                                    <td class="text-center max-temp">30°C</td>
+                                    <td class="text-center avg-temp">26°C</td>
+                                    <td class="text-center humidity-cell">55%</td>
+                                    <td class="text-center wind-cell">8 km/h</td>
+                                    <td class="text-center condition-cell">Sunny</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="continent-section mb-5">
+                    <h3 class="continent-title">Europe</h3>
+                    <div class="table-responsive">
+                        <table class="table weather-table">
+                            <thead>
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Capital</th>
+                                    <th class="text-center">Weather</th>
+                                    <th class="text-center">Min Temp</th>
+                                    <th class="text-center">Max Temp</th>
+                                    <th class="text-center">Avg Temp</th>
+                                    <th class="text-center">Humidity</th>
+                                    <th class="text-center">Wind</th>
+                                    <th class="text-center">Condition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="country-name-cell">United Kingdom</td>
+                                    <td class="capital-name">London</td>
+                                    <td class="text-center weather-emoji">🌧️</td>
+                                    <td class="text-center min-temp">12°C</td>
+                                    <td class="text-center max-temp">18°C</td>
+                                    <td class="text-center avg-temp">15°C</td>
+                                    <td class="text-center humidity-cell">80%</td>
+                                    <td class="text-center wind-cell">15 km/h</td>
+                                    <td class="text-center condition-cell">Rainy</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">Germany</td>
+                                    <td class="capital-name">Berlin</td>
+                                    <td class="text-center weather-emoji">☁️</td>
+                                    <td class="text-center min-temp">8°C</td>
+                                    <td class="text-center max-temp">16°C</td>
+                                    <td class="text-center avg-temp">12°C</td>
+                                    <td class="text-center humidity-cell">70%</td>
+                                    <td class="text-center wind-cell">13 km/h</td>
+                                    <td class="text-center condition-cell">Cloudy</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">France</td>
+                                    <td class="capital-name">Paris</td>
+                                    <td class="text-center weather-emoji">⛅</td>
+                                    <td class="text-center min-temp">14°C</td>
+                                    <td class="text-center max-temp">22°C</td>
+                                    <td class="text-center avg-temp">18°C</td>
+                                    <td class="text-center humidity-cell">65%</td>
+                                    <td class="text-center wind-cell">9 km/h</td>
+                                    <td class="text-center condition-cell">Partly Cloudy</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">Italy</td>
+                                    <td class="capital-name">Rome</td>
+                                    <td class="text-center weather-emoji">☀️</td>
+                                    <td class="text-center min-temp">18°C</td>
+                                    <td class="text-center max-temp">28°C</td>
+                                    <td class="text-center avg-temp">23°C</td>
+                                    <td class="text-center humidity-cell">58%</td>
+                                    <td class="text-center wind-cell">7 km/h</td>
+                                    <td class="text-center condition-cell">Sunny</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">Spain</td>
+                                    <td class="capital-name">Madrid</td>
+                                    <td class="text-center weather-emoji">🌤️</td>
+                                    <td class="text-center min-temp">16°C</td>
+                                    <td class="text-center max-temp">26°C</td>
+                                    <td class="text-center avg-temp">21°C</td>
+                                    <td class="text-center humidity-cell">52%</td>
+                                    <td class="text-center wind-cell">11 km/h</td>
+                                    <td class="text-center condition-cell">Clear</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="continent-section mb-5">
+                    <h3 class="continent-title">Asia</h3>
+                    <div class="table-responsive">
+                        <table class="table weather-table">
+                            <thead>
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Capital</th>
+                                    <th class="text-center">Weather</th>
+                                    <th class="text-center">Min Temp</th>
+                                    <th class="text-center">Max Temp</th>
+                                    <th class="text-center">Avg Temp</th>
+                                    <th class="text-center">Humidity</th>
+                                    <th class="text-center">Wind</th>
+                                    <th class="text-center">Condition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="country-name-cell">China</td>
+                                    <td class="capital-name">Beijing</td>
+                                    <td class="text-center weather-emoji">🌫️</td>
+                                    <td class="text-center min-temp">15°C</td>
+                                    <td class="text-center max-temp">25°C</td>
+                                    <td class="text-center avg-temp">20°C</td>
+                                    <td class="text-center humidity-cell">62%</td>
+                                    <td class="text-center wind-cell">9 km/h</td>
+                                    <td class="text-center condition-cell">Hazy</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">Japan</td>
+                                    <td class="capital-name">Tokyo</td>
+                                    <td class="text-center weather-emoji">☀️</td>
+                                    <td class="text-center min-temp">20°C</td>
+                                    <td class="text-center max-temp">28°C</td>
+                                    <td class="text-center avg-temp">24°C</td>
+                                    <td class="text-center humidity-cell">70%</td>
+                                    <td class="text-center wind-cell">12 km/h</td>
+                                    <td class="text-center condition-cell">Sunny</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">India</td>
+                                    <td class="capital-name">New Delhi</td>
+                                    <td class="text-center weather-emoji">🔥</td>
+                                    <td class="text-center min-temp">28°C</td>
+                                    <td class="text-center max-temp">42°C</td>
+                                    <td class="text-center avg-temp">35°C</td>
+                                    <td class="text-center humidity-cell">45%</td>
+                                    <td class="text-center wind-cell">8 km/h</td>
+                                    <td class="text-center condition-cell">Very Hot</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">South Korea</td>
+                                    <td class="capital-name">Seoul</td>
+                                    <td class="text-center weather-emoji">💧</td>
+                                    <td class="text-center min-temp">18°C</td>
+                                    <td class="text-center max-temp">26°C</td>
+                                    <td class="text-center avg-temp">22°C</td>
+                                    <td class="text-center humidity-cell">75%</td>
+                                    <td class="text-center wind-cell">10 km/h</td>
+                                    <td class="text-center condition-cell">Humid</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="continent-section mb-5">
+                    <h3 class="continent-title">Africa</h3>
+                    <div class="table-responsive">
+                        <table class="table weather-table">
+                            <thead>
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Capital</th>
+                                    <th class="text-center">Weather</th>
+                                    <th class="text-center">Min Temp</th>
+                                    <th class="text-center">Max Temp</th>
+                                    <th class="text-center">Avg Temp</th>
+                                    <th class="text-center">Humidity</th>
+                                    <th class="text-center">Wind</th>
+                                    <th class="text-center">Condition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="country-name-cell">Egypt</td>
+                                    <td class="capital-name">Cairo</td>
+                                    <td class="text-center weather-emoji">🏜️</td>
+                                    <td class="text-center min-temp">22°C</td>
+                                    <td class="text-center max-temp">35°C</td>
+                                    <td class="text-center avg-temp">29°C</td>
+                                    <td class="text-center humidity-cell">35%</td>
+                                    <td class="text-center wind-cell">11 km/h</td>
+                                    <td class="text-center condition-cell">Desert</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">South Africa</td>
+                                    <td class="capital-name">Cape Town</td>
+                                    <td class="text-center weather-emoji">🌤️</td>
+                                    <td class="text-center min-temp">15°C</td>
+                                    <td class="text-center max-temp">23°C</td>
+                                    <td class="text-center avg-temp">19°C</td>
+                                    <td class="text-center humidity-cell">65%</td>
+                                    <td class="text-center wind-cell">16 km/h</td>
+                                    <td class="text-center condition-cell">Mild</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">Nigeria</td>
+                                    <td class="capital-name">Abuja</td>
+                                    <td class="text-center weather-emoji">🌴</td>
+                                    <td class="text-center min-temp">24°C</td>
+                                    <td class="text-center max-temp">32°C</td>
+                                    <td class="text-center avg-temp">28°C</td>
+                                    <td class="text-center humidity-cell">76%</td>
+                                    <td class="text-center wind-cell">8 km/h</td>
+                                    <td class="text-center condition-cell">Tropical</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="continent-section">
+                    <h3 class="continent-title">Oceania</h3>
+                    <div class="table-responsive">
+                        <table class="table weather-table">
+                            <thead>
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Capital</th>
+                                    <th class="text-center">Weather</th>
+                                    <th class="text-center">Min Temp</th>
+                                    <th class="text-center">Max Temp</th>
+                                    <th class="text-center">Avg Temp</th>
+                                    <th class="text-center">Humidity</th>
+                                    <th class="text-center">Wind</th>
+                                    <th class="text-center">Condition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="country-name-cell">Australia</td>
+                                    <td class="capital-name">Canberra</td>
+                                    <td class="text-center weather-emoji">🌤️</td>
+                                    <td class="text-center min-temp">15°C</td>
+                                    <td class="text-center max-temp">25°C</td>
+                                    <td class="text-center avg-temp">20°C</td>
+                                    <td class="text-center humidity-cell">55%</td>
+                                    <td class="text-center wind-cell">13 km/h</td>
+                                    <td class="text-center condition-cell">Clear</td>
+                                </tr>
+                                <tr>
+                                    <td class="country-name-cell">New Zealand</td>
+                                    <td class="capital-name">Wellington</td>
+                                    <td class="text-center weather-emoji">💨</td>
+                                    <td class="text-center min-temp">12°C</td>
+                                    <td class="text-center max-temp">18°C</td>
+                                    <td class="text-center avg-temp">15°C</td>
+                                    <td class="text-center humidity-cell">72%</td>
+                                    <td class="text-center wind-cell">25 km/h</td>
+                                    <td class="text-center condition-cell">Windy</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
